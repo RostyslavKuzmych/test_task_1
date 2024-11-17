@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.util.List;
+
 import java.util.Set;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)

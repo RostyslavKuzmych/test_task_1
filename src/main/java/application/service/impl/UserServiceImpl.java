@@ -21,6 +21,7 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     private static final String EXCEPTION = "You are already registered!";
     private static final String USER_ROLE_ID = "1";
+    public static final String USER_ROLE_NAME = "USER";
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
@@ -32,11 +33,14 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(requestDto.getUsername()).isPresent()) {
             throw new RegistrationLogicException(EXCEPTION);
         }
+
         UserEntity user = userMapper.toModel(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+
         if (roleRepository.findById(USER_ROLE_ID).isEmpty()) {
-            roleRepository.save(new RoleEntity().setId(USER_ROLE_ID).setName("USER"));
+            roleRepository.save(new RoleEntity().setId(USER_ROLE_ID).setName(USER_ROLE_NAME));
         }
+
         user.setRoles(Set.of(USER_ROLE_ID));
         UserEntity savedUser = userRepository.save(user);
         return userMapper.toDto(savedUser);

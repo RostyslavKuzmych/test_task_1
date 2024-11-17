@@ -22,7 +22,6 @@ public class SalesAndTrafficServiceImpl implements SalesAndTrafficService {
     private final SalesAndTrafficByDateRepository salesAndTrafficByDateRepository;
     private final SalesAndTrafficByAsinRepository salesAndTrafficByAsinRepository;
 
-
     @Override
     @Transactional
     @Cacheable(value = "getSalesAndTrafficByDate", key = "#fromDate + '_' + #toDate + '_' + #pageable.toString()", condition = "#fromDate != null and #toDate != null")
